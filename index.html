@@ -1,0 +1,196 @@
+<style>
+    /* Small screen styles */
+@media only screen and (max-width: 768px) {
+  .statistics-wrap {
+    padding: 20px;
+  }
+  form {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    
+    border-radius: 5px;
+  }
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0 10px;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #disclaimerContainer {
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #DEDEDE;
+  }
+  #copyBtn {
+    margin-top: 10px;
+  }
+}
+
+/* Large screen styles */
+@media only screen and (min-width: 768px) {
+  .statistics-wrap {
+    padding: 50px;
+  }
+  form {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    margin: 15px 0;
+    
+    border-radius: 5px;
+  }
+  button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 30px 0 20px;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  #disclaimerContainer {
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #DEDEDE;
+  }
+  #copyBtn {
+    margin-top: 20px;
+  }
+}
+
+  </style>    
+      
+      <div class="statistics-wrap bg-gradient3">
+
+        <div id="app">
+    
+    <form>
+      <div class="form-group">
+        <label for="businessName"><b>Business Name:</b></label>
+        <input type="text" id="businessName" required>
+      </div>
+      <div class="form-group">
+        <label for="websiteName"><b>Website Name:</b></label>
+        <input type="text" id="websiteName" required>
+      </div>
+      <div class="form-group">
+        <label for="websiteType"><b>Website Type:</b></label>
+        <input type="text" id="websiteType" required>
+      </div>
+      <div class="form-group">
+        <label for="websiteUrl"><b>Website URL:</b></label>
+        <input type="text" id="websiteUrl" required>
+      </div>
+      <div class="form-group">
+        <label for="email"><b>Email:</b></label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="form-group">
+        <label for="disclaimerHeader"><b>Disclaimer Header:</b></label>
+        <input type="text" id="disclaimerHeader" required>
+      </div>
+      <button id="generateBtn">Generate</button>
+    </form>
+    <div id="disclaimerContainer">
+        <button id="copyBtn">Copy Disclaimer Text</button>
+      <h2 id="disclaimerHeader"></h2>
+      <p id="disclaimerText"></p>
+     
+    </div>
+  </div>
+  <script src="script.js"></script>
+<script>
+
+const generateBtn = document.getElementById('generateBtn');
+const copyBtn = document.getElementById('copyBtn');
+const disclaimerContainer = document.getElementById('disclaimerContainer');
+const disclaimerHeader = document.getElementById('disclaimerHeader');
+const disclaimerText = document.getElementById('disclaimerText');
+
+generateBtn.addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  const businessName = document.getElementById('businessName').value;
+  const websiteName = document.getElementById('websiteName').value;
+  const websiteType = document.getElementById('websiteType').value;
+  const websiteUrl = document.getElementById('websiteUrl').value;
+  const email = document.getElementById('email').value;
+  const header = document.getElementById('disclaimerHeader').value;
+  
+  disclaimerHeader.textContent = header;
+  disclaimerText.textContent = `<h2>Introduction</h2>
+
+
+<p>      The following disclaimer applies to ${businessName} and ${websiteName}. By using this website, you agree to be bound by this disclaimer. If you do not agree with this disclaimer, you should not use this website.</p>
+<h2> No Legal Advice
+</h2>
+
+<p>   The information contained to ${websiteType} on <a href="${websiteUrl}" target="_blank">${websiteName}</a> is for general information purposes only. The information provided is not intended to be legal advice and should not be relied upon as such. You should seek professional legal advice for your specific situation. Our Privacy Policy Has Been Generated With <a href="disclaimer " target="_blank">Disclaimer&nbsp; Generator</a>.</p>
+<h2>  No Attorney-Client Relationship
+</h2>
+<p>   No attorney-client relationship is established by using this website. By using this website, you acknowledge that no such relationship has been established.
+</p>
+<h2> No Warranty
+</h2>
+<p>   The information on this website is provided “as is” without any representations or warranties, express or implied. ${businessName} makes no representations or warranties in relation to the information on this website.
+</p>
+<h2>
+  Limitations of Liability
+
+</h2>
+<p>  ${businessName} will not be liable for any direct, indirect, or consequential damages arising out of or in connection with the use of this website.
+</p>
+<h2> Indemnification  </h2>
+<p>  By using this website, you agree to indemnify and hold ${businessName} harmless from any and all claims, damages, and expenses, including reasonable attorneys’ fees, arising from your use of this website.
+</p>
+
+<h2> Modifications    </h2>
+ <p>   ${businessName} may revise this disclaimer at any time without notice. By using this website, you agree to be bound by the current version of this disclaimer.
+</p>
+<h2>   Contact   </h2>
+
+<p>   If you have any questions or concerns about this disclaimer, please contact ${businessName} at ${email}.    </p>`;
+  
+  disclaimerContainer.style.display = 'block';
+});
+
+copyBtn.addEventListener('click', function() {
+  const range = document.createRange();
+  range.selectNode(disclaimerText);
+  window.getSelection().addRange(range);
+  
+  try {
+    document.execCommand('copy');
+    alert('Disclaimer text copied to clipboard');
+  } catch(err) {
+    console.error('Unable to copy disclaimer text');
+  }
+  
+  window.getSelection().removeAllRanges();
+});
+
+
+</script>
